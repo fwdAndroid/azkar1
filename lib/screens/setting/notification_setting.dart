@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:timezone/timezone.dart' as tz;
-import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
+import 'package:azkar/provider/prayer_time_provider.dart';
 
 class NotificationSetting extends StatefulWidget {
   const NotificationSetting({super.key});
@@ -11,65 +11,65 @@ class NotificationSetting extends StatefulWidget {
 }
 
 class _NotificationSettingState extends State<NotificationSetting> {
-  final FlutterLocalNotificationsPlugin _notificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+  final List<String> _prayers = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+  final Map<String, bool> _prayerToggles = {};
 
-  // Request POST_NOTIFICATIONS permission (for Android 13+)
-  Future<void> _requestNotificationPermission() async {
-    if (await Permission.notification.isDenied) {
-      await Permission.notification.request();
-    }
+  @override
+  void initState() {
+    super.initState();
+    _loadToggles();
   }
 
-  // Schedule a test Azan notification
-  Future<void> _testAzanNotification() async {
-    await _requestNotificationPermission();
+  Future<void> _loadToggles() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      for (var prayer in _prayers) {
+        _prayerToggles[prayer] = prefs.getBool('notify_$prayer') ?? true;
+      }
+    });
+  }
 
-    const androidDetails = AndroidNotificationDetails(
-      'azan_channel',
-      'Azan Notifications',
-      channelDescription: 'Channel for Azan notifications',
-      importance: Importance.max,
-      priority: Priority.high,
-      sound: RawResourceAndroidNotificationSound(
-        'azan',
-      ), // Ensure azan.mp3 is in res/raw
+  Future<void> _togglePrayer(String prayer, bool enabled) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('notify_$prayer', enabled);
+
+    setState(() {
+      _prayerToggles[prayer] = enabled;
+    });
+
+    // 🔔 Reschedule notifications through the provider method
+    final provider = Provider.of<PrayerTimeProvider>(context, listen: false);
+    await provider.scheduleAllPrayerNotifications(provider.prayerTimes);
+
+    // ✅ Show Snackbar confirmation
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          enabled
+              ? '$prayer notification enabled'
+              : '$prayer notification disabled',
+        ),
+        duration: const Duration(seconds: 2),
+      ),
     );
-
-    const notificationDetails = NotificationDetails(android: androidDetails);
-
-    final now = DateTime.now();
-    final testTime = tz.TZDateTime.from(
-      now.add(const Duration(seconds: 5)),
-      tz.local,
-    );
-
-    await _notificationsPlugin.zonedSchedule(
-      9999, // Unique ID for test
-      'Test Azan',
-      'This is a test Azan notification',
-      testTime,
-      notificationDetails,
-      androidScheduleMode: AndroidScheduleMode.alarmClock,
-      matchDateTimeComponents: DateTimeComponents.time,
-    );
-
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Test Azan notification scheduled!")),
-      );
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Notification Settings")),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: _testAzanNotification,
-          child: const Text("Test Azan Notification"),
-        ),
+      appBar: AppBar(title: const Text("Azan Notification Settings")),
+      body: ListView.builder(
+        itemCount: _prayers.length,
+        itemBuilder: (context, index) {
+          final prayer = _prayers[index];
+          final enabled = _prayerToggles[prayer] ?? true;
+
+          return SwitchListTile(
+            title: Text("Enable $prayer Notification"),
+            value: enabled,
+            onChanged: (value) => _togglePrayer(prayer, value),
+          );
+        },
       ),
     );
   }

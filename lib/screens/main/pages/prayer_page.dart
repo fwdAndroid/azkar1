@@ -43,7 +43,7 @@ class _PrayerPageState extends State<PrayerPage> {
               const SizedBox(height: 30),
 
               const HijriWidget(),
-              const SizedBox(height: 20),
+              const SizedBox(height: 5),
               const PrayerTimesWidget(),
             ],
           ),
