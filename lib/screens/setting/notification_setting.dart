@@ -1,3 +1,4 @@
+import 'package:azkar/provider/language_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
@@ -37,17 +38,21 @@ class _NotificationSettingState extends State<NotificationSetting> {
       _prayerToggles[prayer] = enabled;
     });
 
-    // 🔔 Reschedule notifications through the provider method
     final provider = Provider.of<PrayerTimeProvider>(context, listen: false);
     await provider.scheduleAllPrayerNotifications(provider.prayerTimes);
 
-    // ✅ Show Snackbar confirmation
+    final lang = Provider.of<LanguageProvider>(context, listen: false);
+
+    final enabledText =
+        lang.localizedStrings["notification_enabled"] ?? "notification enabled";
+    final disabledText =
+        lang.localizedStrings["notification_disabled"] ??
+        "notification disabled";
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          enabled
-              ? '$prayer notification enabled'
-              : '$prayer notification disabled',
+          enabled ? '$prayer $enabledText' : '$prayer $disabledText',
         ),
         duration: const Duration(seconds: 2),
       ),
@@ -56,20 +61,47 @@ class _NotificationSettingState extends State<NotificationSetting> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Azan Notification Settings")),
-      body: ListView.builder(
-        itemCount: _prayers.length,
-        itemBuilder: (context, index) {
-          final prayer = _prayers[index];
-          final enabled = _prayerToggles[prayer] ?? true;
+    final lang = Provider.of<LanguageProvider>(context);
 
-          return SwitchListTile(
-            title: Text("Enable $prayer Notification"),
-            value: enabled,
-            onChanged: (value) => _togglePrayer(prayer, value),
-          );
-        },
+    final switchTitlePrefix =
+        lang.localizedStrings["Enable Notification"] ?? "Enable Notification";
+
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
+        title: Text(
+          lang.localizedStrings["Azan Notification Settings"] ??
+              "Azan Notification Settings",
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.transparent,
+      ),
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/bg.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: ListView.builder(
+          itemCount: _prayers.length,
+          itemBuilder: (context, index) {
+            final prayer = _prayers[index];
+            final enabled = _prayerToggles[prayer] ?? true;
+
+            return SwitchListTile(
+              title: Text(
+                "$switchTitlePrefix $prayer",
+                style: TextStyle(color: Colors.white),
+              ),
+              value: enabled,
+              onChanged: (value) => _togglePrayer(prayer, value),
+            );
+          },
+        ),
       ),
     );
   }
