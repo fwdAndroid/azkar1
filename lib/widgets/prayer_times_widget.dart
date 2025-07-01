@@ -121,7 +121,10 @@ class _PrayerTimesWidgetState extends State<PrayerTimesWidget> {
                     ),
                   ),
                   TextButton(
-                    child: Text("Change Location"),
+                    child: Text(
+                      languageProvider.localizedStrings['Change Location'] ??
+                          "Change Location",
+                    ),
                     onPressed: () async {
                       final newLocation = await Navigator.push<PrayerLocation>(
                         context,
@@ -176,7 +179,7 @@ class _PrayerTimesWidgetState extends State<PrayerTimesWidget> {
                       transitionBuilder: (child, animation) =>
                           FadeTransition(opacity: animation, child: child),
                       child: Text(
-                        'Next Prayer ($_nextPrayerName): $_nextPrayerCountdown',
+                        ' Next Prayer ($_nextPrayerName): $_nextPrayerCountdown',
                         key: ValueKey(_nextPrayerCountdown),
                         style: const TextStyle(
                           fontSize: 14,
