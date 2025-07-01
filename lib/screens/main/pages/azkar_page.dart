@@ -284,7 +284,7 @@ class _AzkarPageState extends State<AzkarPage> {
                   ),
                   // Azkar Sections
                   AzkarTitleWidget(
-                    image: "assets/morning.png",
+                    image: "assets/star.png",
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -317,7 +317,7 @@ class _AzkarPageState extends State<AzkarPage> {
                     text: "أذكار النوم",
                   ),
                   AzkarTitleWidget(
-                    image: "assets/after.png",
+                    image: "assets/mosque.png",
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -339,7 +339,7 @@ class _AzkarPageState extends State<AzkarPage> {
                     text: "مواجهة تشبيه",
                   ),
                   AzkarTitleWidget(
-                    image: "assets/benifit.png",
+                    image: "assets/benefit.png",
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
