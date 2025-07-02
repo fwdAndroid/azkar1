@@ -53,9 +53,13 @@ class _MainDashboardState extends State<MainDashboard> {
           items: [
             BottomNavigationBarItem(
               icon: _currentIndex == 0
-                  ? Image.asset("assets/azkar_white.png", width: 25, height: 25)
+                  ? Image.asset(
+                      "assets/moon_14181732.png",
+                      width: 25,
+                      height: 25,
+                    )
                   : Image.asset(
-                      "assets/azkar_color.png",
+                      "assets/moon_14181732.png",
                       width: 25,
                       height: 25,
                     ),
@@ -63,9 +67,13 @@ class _MainDashboardState extends State<MainDashboard> {
             ),
             BottomNavigationBarItem(
               icon: _currentIndex == 1
-                  ? Image.asset("assets/quran_white.png", width: 25, height: 25)
+                  ? Image.asset(
+                      "assets/quran_12858408.png",
+                      width: 25,
+                      height: 25,
+                    )
                   : Image.asset(
-                      "assets/quran_color.png",
+                      "assets/quran_12858408.png",
                       width: 25,
                       height: 25,
                     ),
@@ -76,12 +84,12 @@ class _MainDashboardState extends State<MainDashboard> {
               label: "Prayer",
               icon: _currentIndex == 2
                   ? Image.asset(
-                      "assets/prayer_white.png",
+                      "assets/prayer_12477451.png",
                       width: 25,
                       height: 25,
                     )
                   : Image.asset(
-                      "assets/prayer_color.png",
+                      "assets/prayer_12477451.png",
                       width: 25,
                       height: 25,
                     ),
@@ -90,8 +98,8 @@ class _MainDashboardState extends State<MainDashboard> {
             BottomNavigationBarItem(
               label: "Settings",
               icon: _currentIndex == 3
-                  ? Icon(Icons.settings, size: 25, color: Colors.white)
-                  : Icon(Icons.settings),
+                  ? Image.asset("assets/setting.png", width: 25, height: 25)
+                  : Image.asset("assets/setting.png", width: 25, height: 25),
             ),
           ],
         ),
