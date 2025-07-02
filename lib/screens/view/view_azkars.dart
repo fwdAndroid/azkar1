@@ -2,9 +2,7 @@ import 'package:azkar/provider/language_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
 
 class ViewAzkarPage extends StatefulWidget {
   final String azkarType;
@@ -15,19 +13,6 @@ class ViewAzkarPage extends StatefulWidget {
 }
 
 class _ViewAzkarPageState extends State<ViewAzkarPage> {
-  final AudioPlayer _audioPlayer = AudioPlayer();
-  String? _currentlyPlayingUrl;
-
-  @override
-  void dispose() {
-    _audioPlayer.dispose();
-    super.dispose();
-  }
-
-  String formatDuration(Duration duration) {
-    return DateFormat('mm:ss').format(DateTime(0).add(duration));
-  }
-
   @override
   Widget build(BuildContext context) {
     final languageProvider = Provider.of<LanguageProvider>(context);
@@ -75,9 +60,6 @@ class _ViewAzkarPageState extends State<ViewAzkarPage> {
                 final azkar = azkarList[index].data() as Map<String, dynamic>;
                 final arabic = azkar['arabic'] ?? azkar['dua'] ?? '';
                 final translation = azkar['translation'] ?? '';
-                final audio = (azkar['audio'] ?? '').toString().trim();
-                final hasAudio =
-                    audio.isNotEmpty && Uri.tryParse(audio)?.isAbsolute == true;
 
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -130,80 +112,6 @@ class _ViewAzkarPageState extends State<ViewAzkarPage> {
                             ),
                             textAlign: TextAlign.center,
                           ),
-
-                        /// ✅ AUDIO PLAYER
-                        if (hasAudio) ...[
-                          const SizedBox(height: 16),
-                          StreamBuilder<Duration>(
-                            stream: _audioPlayer.positionStream,
-                            builder: (context, snapshot) {
-                              final position = snapshot.data ?? Duration.zero;
-                              final total =
-                                  _audioPlayer.duration ?? Duration.zero;
-
-                              return Column(
-                                children: [
-                                  Slider(
-                                    min: 0,
-                                    max: total.inMilliseconds.toDouble().clamp(
-                                      0.0,
-                                      double.infinity,
-                                    ),
-                                    value: position.inMilliseconds
-                                        .clamp(0, total.inMilliseconds)
-                                        .toDouble(),
-                                    onChanged: (value) {
-                                      _audioPlayer.seek(
-                                        Duration(milliseconds: value.toInt()),
-                                      );
-                                    },
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        formatDuration(position),
-                                        style: TextStyle(color: Colors.white70),
-                                      ),
-                                      Text(
-                                        formatDuration(total),
-                                        style: TextStyle(color: Colors.white70),
-                                      ),
-                                    ],
-                                  ),
-                                  IconButton(
-                                    icon: Icon(
-                                      _audioPlayer.playing &&
-                                              _currentlyPlayingUrl == audio
-                                          ? Icons.pause_circle_filled
-                                          : Icons.play_circle_fill,
-                                      color: Colors.white,
-                                      size: 36,
-                                    ),
-                                    onPressed: () async {
-                                      if (_currentlyPlayingUrl != audio) {
-                                        await _audioPlayer.setUrl(audio);
-                                        _currentlyPlayingUrl = audio;
-                                        _audioPlayer.setLoopMode(
-                                          LoopMode.one,
-                                        ); // 🔁 Repeat mode
-                                        await _audioPlayer.play();
-                                      } else {
-                                        if (_audioPlayer.playing) {
-                                          await _audioPlayer.pause();
-                                        } else {
-                                          await _audioPlayer.play();
-                                        }
-                                      }
-                                      setState(() {});
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                        ],
                       ],
                     ),
                   ),
