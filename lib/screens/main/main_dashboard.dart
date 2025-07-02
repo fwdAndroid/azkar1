@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:azkar/screens/main/pages/azkar_page.dart';
 import 'package:azkar/screens/main/pages/prayer_page.dart';
-import 'package:azkar/screens/main/pages/qibla_page.dart';
 import 'package:azkar/screens/main/pages/quran_page.dart';
 import 'package:azkar/screens/main/pages/setting_page.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +22,6 @@ class _MainDashboardState extends State<MainDashboard> {
     AzkarPage(), // Replace with your screen widgets
     QuranPage(),
     PrayerPage(),
-    QiblaPage(),
     SettingPage(),
   ];
   @override
@@ -88,19 +86,10 @@ class _MainDashboardState extends State<MainDashboard> {
                       height: 25,
                     ),
             ),
-            BottomNavigationBarItem(
-              label: "Qibla",
-              icon: _currentIndex == 3
-                  ? Image.asset("assets/qibla_white.png", width: 25, height: 25)
-                  : Image.asset(
-                      "assets/qibla_color.png",
-                      width: 25,
-                      height: 25,
-                    ),
-            ),
+
             BottomNavigationBarItem(
               label: "Settings",
-              icon: _currentIndex == 4
+              icon: _currentIndex == 3
                   ? Icon(Icons.settings, size: 25, color: Colors.white)
                   : Icon(Icons.settings),
             ),

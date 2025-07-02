@@ -85,27 +85,6 @@ class _DrawerWidgetState extends State<DrawerWidget>
           Divider(),
           ListTile(
             title: Text(
-              languageProvider.localizedStrings["Qibla Direction"] ??
-                  'Qibla Direction',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w300,
-                fontSize: 16,
-              ),
-            ),
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      const MainDashboard(initialPageIndex: 3),
-                ),
-              );
-            },
-          ),
-          Divider(),
-          ListTile(
-            title: Text(
               languageProvider.localizedStrings["Quran"] ?? 'Quran',
               style: TextStyle(
                 color: Colors.white,
