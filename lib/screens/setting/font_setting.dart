@@ -10,19 +10,20 @@ class FontSettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fontProvider = Provider.of<FontSettingsProvider>(context);
-    final languageProvider = Provider.of<LanguageProvider>(context); // Access
+    final languageProvider = Provider.of<LanguageProvider>(context);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         title: ArabicText('اعدادات الخط'),
         backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
       body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/bg.png"),
             fit: BoxFit.cover,
@@ -30,82 +31,103 @@ class FontSettingsScreen extends StatelessWidget {
         ),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: ListView(
+              physics: const BouncingScrollPhysics(),
               children: [
                 ArabicText(
                   languageProvider
                           .localizedStrings["Choose the type of Arabic font"] ??
                       "Choose the type of Arabic font",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 8),
-
-                // Font Selection (Radio Buttons)
-                ...fonts.map((font) {
-                  return RadioListTile<String>(
-                    title: ArabicText(font, style: TextStyle(fontFamily: font)),
-                    value: font,
-                    groupValue: fontProvider.arabicFontFamily,
-                    onChanged: (value) {
-                      if (value != null) {
-                        fontProvider.updateFontFamily(value);
-                      }
-                    },
-                  );
-                }).toList(),
-
-                const SizedBox(height: 20),
-                ArabicText(
-                  languageProvider.localizedStrings["Font Size"] ??
-                      "Font Size: ${fontProvider.fontSize.toInt()}",
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                const SizedBox(height: 8),
+
+                // Font Selection (Radio Buttons)
+                ...fonts.map((font) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: RadioListTile<String>(
+                      title: ArabicText(
+                        font,
+                        style: TextStyle(fontFamily: font),
+                      ),
+                      dense: true,
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+                      value: font,
+                      groupValue: fontProvider.arabicFontFamily,
+                      onChanged: (value) {
+                        if (value != null) {
+                          fontProvider.updateFontFamily(value);
+                        }
+                      },
+                    ),
+                  );
+                }).toList(),
+
+                const SizedBox(height: 20),
+                ArabicText(
+                  languageProvider.localizedStrings["Font Size"] ?? "Font Size",
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
                 Slider(
                   value: fontProvider.fontSize,
                   min: 18,
                   max: 48,
-                  divisions: 15,
+                  divisions: 10,
                   label: fontProvider.fontSize.toInt().toString(),
                   onChanged: (size) {
                     fontProvider.updateFontSize(size);
                   },
                 ),
+                Center(
+                  child: ArabicText(
+                    "${fontProvider.fontSize.toInt()} px",
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
 
-                const SizedBox(height: 20),
-                const Divider(),
+                const SizedBox(height: 24),
+                const Divider(color: Colors.white70),
+                const SizedBox(height: 16),
+
                 ArabicText(
                   languageProvider.localizedStrings["Font Preview"] ??
                       "Font Preview",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 12),
                 Container(
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.grey.shade100,
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: ArabicText(
                     languageProvider
                             .localizedStrings["God is the Light of the heavens and the earth."] ??
-                        'God is the Light of the heavens and the earth.',
+                        'ٱللَّهُ نُورُ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ',
                     textAlign: TextAlign.center,
                   ),
                 ),
 
                 const SizedBox(height: 30),
 
-                // 🔁 Reset Button
+                // Reset Button
                 Center(
                   child: ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.redAccent,
-                      foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 24,
                         vertical: 12,
@@ -132,6 +154,7 @@ class FontSettingsScreen extends StatelessWidget {
                     },
                   ),
                 ),
+                const SizedBox(height: 40),
               ],
             ),
           ),

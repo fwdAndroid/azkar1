@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class FontSettingsProvider extends ChangeNotifier {
   String _arabicFontFamily = 'Amiri'; // default
-  double _fontSize = 24.0; // default
+  double _fontSize = 18.0; // default
 
   String get arabicFontFamily => _arabicFontFamily;
   double get fontSize => _fontSize;
@@ -15,7 +15,7 @@ class FontSettingsProvider extends ChangeNotifier {
   Future<void> _loadFontSettings() async {
     final prefs = await SharedPreferences.getInstance();
     _arabicFontFamily = prefs.getString('arabicFontFamily') ?? 'Amiri';
-    _fontSize = prefs.getDouble('fontSize') ?? 24.0;
+    _fontSize = prefs.getDouble('fontSize') ?? 18.0;
     notifyListeners();
   }
 
@@ -36,7 +36,7 @@ class FontSettingsProvider extends ChangeNotifier {
   /// 🔁 Reset to default and save in SharedPreferences
   Future<void> resetToDefault() async {
     _arabicFontFamily = 'Amiri';
-    _fontSize = 24.0;
+    _fontSize = 18.0;
 
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('arabicFontFamily', _arabicFontFamily);
