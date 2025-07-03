@@ -6,6 +6,7 @@ import 'package:azkar/widgets/location_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
+import 'package:shimmer/shimmer.dart';
 
 class PrayerTimesWidget extends StatefulWidget {
   const PrayerTimesWidget({super.key});
@@ -217,14 +218,28 @@ class _PrayerTimesWidgetState extends State<PrayerTimesWidget> {
 
               /// Prayer Time Rows
               if (provider.isLoading)
-                const Center(child: CircularProgressIndicator())
+                Column(
+                  children: List.generate(6, (index) {
+                    // Show 6 loading rows (Fajr, Dhuhr, Asr, etc.)
+                    return _buildPrayerTimeRow(
+                      PrayerTime(
+                        name: '...',
+                        time: 'Loading...',
+                        isCurrent: false,
+                      ),
+                      isLoading: true,
+                    );
+                  }),
+                )
               else if (provider.error != null)
                 Text(
                   'Error: ${provider.error}',
                   style: const TextStyle(color: Colors.red),
                 )
               else
-                ...provider.prayerTimes.map(_buildPrayerTimeRow).toList(),
+                ...provider.prayerTimes
+                    .map((prayer) => _buildPrayerTimeRow(prayer))
+                    .toList(),
             ],
           ),
         ),
@@ -232,15 +247,26 @@ class _PrayerTimesWidgetState extends State<PrayerTimesWidget> {
     );
   }
 
-  Widget _buildPrayerTimeRow(PrayerTime prayer) {
+  Widget _buildPrayerTimeRow(PrayerTime prayer, {bool isLoading = false}) {
     final now = DateTime.now();
-    final parts = prayer.time.split(':');
-    final hour = int.tryParse(parts[0]) ?? 0;
-    final minute = int.tryParse(parts[1]) ?? 0;
-    final prayerTime = DateTime(now.year, now.month, now.day, hour, minute);
-    final isPast = prayerTime.isBefore(now) && !prayer.isCurrent;
 
-    final bgColor = prayer.isCurrent
+    // Prevent parsing error during shimmer
+    DateTime prayerTime = now;
+    bool isPast = false;
+
+    if (!isLoading) {
+      final parts = prayer.time.split(':');
+      if (parts.length >= 2) {
+        final hour = int.tryParse(parts[0]) ?? 0;
+        final minute = int.tryParse(parts[1]) ?? 0;
+        prayerTime = DateTime(now.year, now.month, now.day, hour, minute);
+      }
+      isPast = prayerTime.isBefore(now) && !prayer.isCurrent;
+    }
+
+    final bgColor = isLoading
+        ? Colors.grey.shade100
+        : prayer.isCurrent
         ? const Color(0xFF1D3B2A).withOpacity(0.1)
         : isPast
         ? Colors.grey.shade100
@@ -248,11 +274,11 @@ class _PrayerTimesWidgetState extends State<PrayerTimesWidget> {
 
     final borderColor = prayer.isCurrent
         ? const Color(0xFF1D3B2A)
-        : isPast
-        ? Colors.grey.shade300
         : Colors.grey.shade300;
 
-    final textColor = prayer.isCurrent
+    final textColor = isLoading
+        ? Colors.grey.shade300
+        : prayer.isCurrent
         ? const Color(0xFF1D3B2A)
         : isPast
         ? Colors.grey
@@ -268,40 +294,55 @@ class _PrayerTimesWidgetState extends State<PrayerTimesWidget> {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              if (prayer.isCurrent)
-                Container(
-                  width: 8,
-                  height: 8,
-                  margin: const EdgeInsets.only(right: 8),
-                  decoration: const BoxDecoration(
-                    color: Color(0xFF1D3B2A),
-                    shape: BoxShape.circle,
+        children: isLoading
+            ? [
+                Shimmer.fromColors(
+                  baseColor: Colors.grey.shade300,
+                  highlightColor: Colors.grey.shade100,
+                  child: Container(width: 80, height: 16, color: Colors.white),
+                ),
+                Shimmer.fromColors(
+                  baseColor: Colors.grey.shade300,
+                  highlightColor: Colors.grey.shade100,
+                  child: Container(width: 60, height: 16, color: Colors.white),
+                ),
+              ]
+            : [
+                Row(
+                  children: [
+                    if (prayer.isCurrent)
+                      Container(
+                        width: 8,
+                        height: 8,
+                        margin: const EdgeInsets.only(right: 8),
+                        decoration: const BoxDecoration(
+                          color: Color(0xFF1D3B2A),
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    Text(
+                      prayer.name,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: prayer.isCurrent
+                            ? FontWeight.bold
+                            : FontWeight.w500,
+                        color: textColor,
+                      ),
+                    ),
+                  ],
+                ),
+                Text(
+                  prayer.time,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: prayer.isCurrent
+                        ? FontWeight.bold
+                        : FontWeight.w500,
+                    color: textColor,
                   ),
                 ),
-              Text(
-                prayer.name,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: prayer.isCurrent
-                      ? FontWeight.bold
-                      : FontWeight.w500,
-                  color: textColor,
-                ),
-              ),
-            ],
-          ),
-          Text(
-            prayer.time,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: prayer.isCurrent ? FontWeight.bold : FontWeight.w500,
-              color: textColor,
-            ),
-          ),
-        ],
+              ],
       ),
     );
   }
