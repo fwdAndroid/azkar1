@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class FontSettingsScreen extends StatelessWidget {
-  final List<String> fonts = ['Amiri', 'Scheherazade'];
+  final List<String> fonts = ['Amiri', 'Scheherazade', 'KFGQPC'];
 
   @override
   Widget build(BuildContext context) {

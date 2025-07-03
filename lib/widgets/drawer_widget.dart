@@ -56,6 +56,7 @@ class _DrawerWidgetState extends State<DrawerWidget>
                   fontWeight: FontWeight.w300,
                   fontSize: 16,
                 ),
+                textAlign: TextAlign.left,
               ),
               onTap: () {
                 Navigator.push(
@@ -75,6 +76,7 @@ class _DrawerWidgetState extends State<DrawerWidget>
                 fontWeight: FontWeight.w300,
                 fontSize: 16,
               ),
+              textAlign: TextAlign.left,
             ),
             onTap: () {
               Navigator.push(
@@ -92,6 +94,7 @@ class _DrawerWidgetState extends State<DrawerWidget>
                 fontWeight: FontWeight.w300,
                 fontSize: 16,
               ),
+              textAlign: TextAlign.left,
             ),
             onTap: () {
               Navigator.pushReplacement(
@@ -113,6 +116,7 @@ class _DrawerWidgetState extends State<DrawerWidget>
                 fontWeight: FontWeight.w300,
                 fontSize: 16,
               ),
+              textAlign: TextAlign.left,
             ),
             onTap: () {
               Navigator.push(
@@ -130,6 +134,7 @@ class _DrawerWidgetState extends State<DrawerWidget>
                 fontWeight: FontWeight.w300,
                 fontSize: 16,
               ),
+              textAlign: TextAlign.left,
             ),
             onTap: () {
               Navigator.push(
@@ -151,6 +156,7 @@ class _DrawerWidgetState extends State<DrawerWidget>
             title: ArabicText(
               languageProvider.localizedStrings["Logout"] ?? "Logout",
               style: TextStyle(color: Colors.white),
+              textAlign: TextAlign.left,
             ),
             leading: Icon(Icons.logout, color: Colors.red),
           ),

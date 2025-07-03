@@ -101,5 +101,8 @@ flutter:
     - family: Scheherazade
       fonts:
         - asset: assets/fonts/ScheherazadeNew-Regular.ttf
+    - family: KFGQPC
+      fonts:
+        - asset: assets/fonts/KFGQPC Uthmanic Script HAFS Regular.ttf    
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

@@ -1,64 +1,142 @@
+import 'package:azkar/screens/main/quran_screens/surah_detail_screen.dart';
+import 'package:azkar/utils/arabic_surrah_names.dart';
 import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:quran/quran.dart' as quran;
 
-class ReadQuran extends StatelessWidget {
+class ReadQuran extends StatefulWidget {
   const ReadQuran({super.key});
+
+  @override
+  State<ReadQuran> createState() => _ReadQuranState();
+}
+
+class _ReadQuranState extends State<ReadQuran> {
+  List<int> allSurah = List.generate(114, (index) => index + 1);
+  List<int> filteredSurah = [];
+  final TextEditingController _searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    filteredSurah = allSurah;
+    _searchController.addListener(_filterSurahs);
+  }
+
+  void _filterSurahs() {
+    final query = _searchController.text.toLowerCase();
+    if (query.isEmpty) {
+      setState(() {
+        filteredSurah = allSurah;
+      });
+    } else {
+      setState(() {
+        filteredSurah = allSurah.where((surahNumber) {
+          final arabic = arabicSurahNames[surahNumber - 1].toLowerCase();
+          final english = quran.getSurahNameEnglish(surahNumber).toLowerCase();
+          final transliteration = transliterationSurahNames[surahNumber - 1]
+              .toLowerCase();
+
+          return arabic.contains(query) ||
+              english.contains(query) ||
+              transliteration.contains(query);
+        }).toList();
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Directionality(
-        textDirection: TextDirection.rtl,
-        child: ListView.builder(
-          itemCount: quran.totalSurahCount,
-          itemBuilder: (context, surahIndex) {
-            int surahNum = surahIndex + 1;
-            int verseCount = quran.getVerseCount(surahNum);
-
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                // 🕌 Surah name header
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                  child: Center(
-                    child: ArabicText(
-                      '${quran.getSurahName(surahNum)} (${quran.getSurahNameEnglish(surahNum)})',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            // Modern search bar
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: TextFormField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                  hintText: 'Search surah...',
+                  prefixIcon: const Icon(Icons.search),
+                  border: InputBorder.none,
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 16,
                   ),
                 ),
-
-                // 📖 Ayahs list
-                ListView.builder(
-                  itemCount: verseCount,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, ayahIndex) {
-                    final ayah = quran.getVerse(
-                      surahNum,
-                      ayahIndex + 1,
-                      verseEndSymbol: true,
-                    );
-
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 6,
-                        horizontal: 12,
-                      ),
-                      child: ArabicText(ayah, textAlign: TextAlign.right),
-                    );
-                  },
-                ),
-
-                const Divider(thickness: 1),
-              ],
-            );
-          },
+              ),
+            ),
+            const SizedBox(height: 16),
+            Expanded(
+              child: ListView.builder(
+                itemCount: filteredSurah.length,
+                itemBuilder: (context, index) {
+                  final surahNumber = filteredSurah[index];
+                  return _buildSurahCard(context, surahNumber);
+                },
+              ),
+            ),
+          ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildSurahCard(BuildContext context, int surahNumber) {
+    return Card(
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: ListTile(
+        leading: Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            color: Colors.blue[100],
+            borderRadius: BorderRadius.circular(8),
+          ),
+          alignment: Alignment.center,
+          child: ArabicText(
+            surahNumber.toString(),
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.blue,
+            ),
+          ),
+        ),
+        title: ArabicText(
+          arabicSurahNames[surahNumber - 1],
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+          textAlign: TextAlign.left,
+        ),
+        subtitle: Text(
+          '${quran.getVerseCount(surahNumber)} verses • ${quran.getSurahName(surahNumber)}',
+        ),
+
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SurahDetailScreen(
+                arabicSurahNames[surahNumber - 1],
+                surahNumber: surahNumber,
+              ),
+            ),
+          );
+        },
       ),
     );
   }

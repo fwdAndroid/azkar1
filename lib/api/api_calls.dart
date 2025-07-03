@@ -162,4 +162,29 @@ class ApiCalls {
       throw ("Can't get the Surah");
     }
   }
+
+  static Future<List<dynamic>> fetchSurahList() async {
+    final resp = await http.get(
+      Uri.parse('https://api.alquran.cloud/v1/surah'),
+    );
+    if (resp.statusCode == 200) {
+      return jsonDecode(resp.body)['data'];
+    } else {
+      throw Exception("Failed to load Surah list");
+    }
+  }
+
+  static Future<List<String>> fetchSurahUthmani(int surahNumber) async {
+    final resp = await http.get(
+      Uri.parse(
+        'https://api.alquran.cloud/v1/surah/$surahNumber/quran-uthmani',
+      ),
+    );
+    if (resp.statusCode == 200) {
+      final verses = jsonDecode(resp.body)['data']['ayahs'] as List;
+      return verses.map((v) => v['text'] as String).toList();
+    } else {
+      throw Exception("Failed to load surah");
+    }
+  }
 }
