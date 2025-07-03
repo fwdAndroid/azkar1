@@ -1,6 +1,7 @@
 import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/screens/setting/change_language.dart';
 import 'package:azkar/screens/setting/edit_profile.dart';
+import 'package:azkar/screens/setting/font_setting.dart';
 import 'package:azkar/screens/setting/notification_setting.dart';
 import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:azkar/widgets/logout_widget.dart';
@@ -88,6 +89,26 @@ class _SettingPageState extends State<SettingPage> {
                     style: TextStyle(color: Colors.white),
                   ),
                   leading: Icon(Icons.language, color: Colors.white),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, right: 8, bottom: 8),
+                child: ListTile(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (builder) => FontSettingsScreen(),
+                      ),
+                    );
+                  },
+                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.white),
+                  title: ArabicText(
+                    languageProvider.localizedStrings["Font Setting"] ??
+                        "Font Setting",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  leading: Icon(Icons.font_download, color: Colors.white),
                 ),
               ),
               Padding(
