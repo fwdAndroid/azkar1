@@ -1,10 +1,12 @@
 import 'dart:io';
+import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/screens/main/pages/azkar_page.dart';
 import 'package:azkar/screens/main/pages/prayer_page.dart';
 import 'package:azkar/screens/main/pages/quran_page.dart';
 import 'package:azkar/screens/main/pages/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class MainDashboard extends StatefulWidget {
   final int initialPageIndex; // new
@@ -32,6 +34,8 @@ class _MainDashboardState extends State<MainDashboard> {
 
   @override
   Widget build(BuildContext context) {
+    final languageProvider = Provider.of<LanguageProvider>(context);
+
     return WillPopScope(
       onWillPop: () async {
         final shouldPop = await _showExitDialog(context);
@@ -63,7 +67,7 @@ class _MainDashboardState extends State<MainDashboard> {
                       width: 25,
                       height: 25,
                     ),
-              label: 'Azkar',
+              label: languageProvider.localizedStrings["Azkar"] ?? 'Azkar',
             ),
             BottomNavigationBarItem(
               icon: _currentIndex == 1
@@ -77,11 +81,11 @@ class _MainDashboardState extends State<MainDashboard> {
                       width: 25,
                       height: 25,
                     ),
-              label: 'Quran',
+              label: languageProvider.localizedStrings["Quran"] ?? 'Quran',
             ),
 
             BottomNavigationBarItem(
-              label: "Prayer",
+              label: languageProvider.localizedStrings["Prayer"] ?? "Prayer",
               icon: _currentIndex == 2
                   ? Image.asset(
                       "assets/prayer_12477451.png",
@@ -96,7 +100,8 @@ class _MainDashboardState extends State<MainDashboard> {
             ),
 
             BottomNavigationBarItem(
-              label: "Settings",
+              label:
+                  languageProvider.localizedStrings["Settings"] ?? "Settings",
               icon: _currentIndex == 3
                   ? Image.asset("assets/setting.png", width: 25, height: 25)
                   : Image.asset("assets/setting.png", width: 25, height: 25),
