@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:azkar/provider/language_provider.dart';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -108,7 +109,7 @@ class _TashbeehCounterState extends State<TashbeehCounter> {
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.white),
         centerTitle: true,
-        title: Text(
+        title: ArabicText(
           languageProvider.localizedStrings["Tasbeeh"] ?? "Tasbeeh",
           style: TextStyle(color: Colors.white),
         ),
@@ -129,7 +130,7 @@ class _TashbeehCounterState extends State<TashbeehCounter> {
             if (timerRunning)
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
-                child: Text(
+                child: ArabicText(
                   formatDuration(elapsed),
                   style: TextStyle(
                     fontSize: timerFontSize,
@@ -138,7 +139,7 @@ class _TashbeehCounterState extends State<TashbeehCounter> {
                   ),
                 ),
               ),
-            Text(
+            ArabicText(
               "$counter",
               style: TextStyle(
                 fontSize: counterFontSize,
@@ -152,7 +153,7 @@ class _TashbeehCounterState extends State<TashbeehCounter> {
             ElevatedButton(
               onPressed: incrementCounter,
               style: _buttonStyle(screenWidth, screenHeight),
-              child: Text(
+              child: ArabicText(
                 languageProvider.localizedStrings["Tap"] ?? "Tap",
                 style: TextStyle(fontSize: buttonFontSize),
               ),
@@ -164,7 +165,7 @@ class _TashbeehCounterState extends State<TashbeehCounter> {
             ElevatedButton(
               onPressed: timerRunning ? null : startTimer,
               style: _buttonStyle(screenWidth, screenHeight),
-              child: Text(
+              child: ArabicText(
                 languageProvider.localizedStrings["Start"] ?? "Start",
                 style: TextStyle(fontSize: buttonFontSize),
               ),
@@ -176,7 +177,7 @@ class _TashbeehCounterState extends State<TashbeehCounter> {
             ElevatedButton(
               onPressed: timerRunning ? stopTimer : null,
               style: _buttonStyle(screenWidth, screenHeight),
-              child: Text(
+              child: ArabicText(
                 languageProvider.localizedStrings["Stop"] ?? "Stop",
                 style: TextStyle(fontSize: buttonFontSize),
               ),
@@ -187,7 +188,7 @@ class _TashbeehCounterState extends State<TashbeehCounter> {
             // Reset
             TextButton(
               onPressed: reset,
-              child: Text(
+              child: ArabicText(
                 languageProvider.localizedStrings["Reset"] ?? "Reset",
                 style: TextStyle(
                   fontSize: buttonFontSize,

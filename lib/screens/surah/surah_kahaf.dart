@@ -1,8 +1,7 @@
 import 'dart:convert';
-import 'package:azkar/provider/font_provider.dart';
 import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/provider/theme_provider.dart';
-import 'package:azkar/widgets/font_setting_dialog.dart';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -59,7 +58,6 @@ class _OpenSurahPageState extends State<OpenSurahPage> {
   @override
   Widget build(BuildContext context) {
     final languageProvider = Provider.of<LanguageProvider>(context);
-    final fontSettings = Provider.of<FontSettings>(context);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -74,20 +72,7 @@ class _OpenSurahPageState extends State<OpenSurahPage> {
               onPressed: () => themeProvider.toggleTheme(),
             ),
           ),
-          PopupMenuButton<int>(
-            icon: const Icon(Icons.more_vert),
-            itemBuilder: (context) => [
-              PopupMenuItem<int>(value: 0, child: Text('Font Settings')),
-            ],
-            onSelected: (value) {
-              if (value == 0) {
-                showDialog(
-                  context: context,
-                  builder: (_) => const FontSettingsDialog(),
-                );
-              }
-            },
-          ),
+
           IconButton(
             icon: const Icon(Icons.share, color: Colors.white),
             onPressed: shareSurahText,
@@ -123,23 +108,15 @@ class _OpenSurahPageState extends State<OpenSurahPage> {
                       child: Column(
                         children: [
                           ListTile(
-                            title: Text(
+                            title: ArabicText(
                               ayah['text'],
                               textAlign: TextAlign.right,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: fontSettings.fontSize + 4,
-                                fontFamily: fontSettings.fontFamily,
-                              ),
+                              style: TextStyle(color: Colors.white),
                             ),
                             subtitle: Text(
                               'آية ${convertToArabicNumber(ayah['numberInSurah'])}',
                               textAlign: TextAlign.right,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: fontSettings.fontSize,
-                                fontFamily: fontSettings.fontFamily,
-                              ),
+                              style: TextStyle(color: Colors.white),
                             ),
                           ),
                           Divider(),

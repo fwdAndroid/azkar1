@@ -1,3 +1,4 @@
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -30,7 +31,7 @@ class AzkarTitleWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Image.asset(image),
-                Text(
+                ArabicText(
                   text,
                   style: TextStyle(
                     color: Colors.white,

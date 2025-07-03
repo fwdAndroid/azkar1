@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:azkar/model/ruqyah_model_quran.dart';
@@ -26,7 +27,7 @@ class _RuqyahScreenState extends State<RuqyahScreen> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Colors.transparent,
-        title: const Text(
+        title: const ArabicText(
           "Ruqyah from Quran",
           style: TextStyle(color: Colors.white),
         ),
@@ -48,14 +49,14 @@ class _RuqyahScreenState extends State<RuqyahScreen> {
                 return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
                 return Center(
-                  child: Text(
+                  child: ArabicText(
                     '❌ Error loading Ruqyah data:\n${snapshot.error}',
                     style: const TextStyle(color: Colors.red),
                     textAlign: TextAlign.center,
                   ),
                 );
               } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return const Center(child: Text('No Ruqyah data found.'));
+                return const Center(child: ArabicText('No Ruqyah data found.'));
               }
 
               final data = snapshot.data!;
@@ -64,7 +65,7 @@ class _RuqyahScreenState extends State<RuqyahScreen> {
                 itemBuilder: (context, index) {
                   final item = data[index];
                   return ExpansionTile(
-                    title: Text(
+                    title: ArabicText(
                       item.title,
                       style: TextStyle(color: Colors.white),
                     ),
@@ -72,7 +73,7 @@ class _RuqyahScreenState extends State<RuqyahScreen> {
                       return Column(
                         children: [
                           ListTile(
-                            title: Text(
+                            title: ArabicText(
                               verse.arabic,
                               textAlign: TextAlign.right,
                               style: const TextStyle(
@@ -80,7 +81,7 @@ class _RuqyahScreenState extends State<RuqyahScreen> {
                                 color: Colors.white,
                               ),
                             ),
-                            subtitle: Text(
+                            subtitle: ArabicText(
                               verse.english,
                               style: const TextStyle(
                                 fontSize: 16,

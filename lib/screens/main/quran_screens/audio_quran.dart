@@ -3,6 +3,7 @@ import 'package:azkar/model/qari_model.dart';
 import 'package:azkar/model/quran_audio_model.dart';
 import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/screens/main/quran_screens/audio_surrah_screen.dart';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:azkar/widgets/qari_custom_tile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +35,7 @@ class _AudioQuranState extends State<AudioQuran> {
       builder: (BuildContext context, AsyncSnapshot<List<Qari>> snapshot) {
         if (snapshot.hasError) {
           return Center(
-            child: Text(
+            child: ArabicText(
               languageProvider.localizedStrings["Qari's data not found"] ??
                   "Qari's data not found",
             ),

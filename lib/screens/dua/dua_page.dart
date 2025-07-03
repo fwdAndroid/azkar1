@@ -1,9 +1,8 @@
 import 'dart:convert';
 
 import 'package:azkar/model/dua_model.dart';
-import 'package:azkar/provider/font_provider.dart';
 import 'package:azkar/provider/theme_provider.dart';
-import 'package:azkar/widgets/font_setting_dialog.dart';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +54,6 @@ class _DuaPageState extends State<DuaPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final fontSettings = Provider.of<FontSettings>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Duas', style: TextStyle(color: Colors.white)),
@@ -70,20 +68,6 @@ class _DuaPageState extends State<DuaPage> {
               ),
               onPressed: () => themeProvider.toggleTheme(),
             ),
-          ),
-          PopupMenuButton<int>(
-            icon: const Icon(Icons.more_vert),
-            itemBuilder: (context) => [
-              PopupMenuItem<int>(value: 0, child: Text('Font Settings')),
-            ],
-            onSelected: (value) {
-              if (value == 0) {
-                showDialog(
-                  context: context,
-                  builder: (_) => const FontSettingsDialog(),
-                );
-              }
-            },
           ),
         ],
       ),
@@ -103,7 +87,7 @@ class _DuaPageState extends State<DuaPage> {
               return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               return Center(
-                child: Text('Error loading duas: ${snapshot.error}'),
+                child: ArabicText('Error loading duas: ${snapshot.error}'),
               );
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
               return const Center(child: Text('No duas found.'));
@@ -142,13 +126,9 @@ class _DuaPageState extends State<DuaPage> {
                 Expanded(
                   child: _filteredDuas.isEmpty
                       ? Center(
-                          child: Text(
+                          child: ArabicText(
                             'No Duas match your search.',
-                            style: TextStyle(
-                              fontSize: fontSettings.fontSize + 4,
-                              fontFamily: fontSettings.fontFamily,
-                              color: theme.disabledColor,
-                            ),
+                            style: TextStyle(color: theme.disabledColor),
                           ),
                         )
                       : ListView.builder(
@@ -179,22 +159,14 @@ class _DuaPageState extends State<DuaPage> {
                                       ),
                                     ),
                                     const SizedBox(height: 12),
-                                    Text(
+                                    ArabicText(
                                       dua.arabic,
-                                      style: TextStyle(
-                                        fontSize: fontSettings.fontSize + 4,
-                                        fontFamily: fontSettings.fontFamily,
-                                        height: 1.5,
-                                      ),
+                                      style: TextStyle(height: 1.5),
                                     ),
                                     const SizedBox(height: 12),
-                                    Text(
+                                    ArabicText(
                                       dua.english,
-                                      style: TextStyle(
-                                        fontSize: fontSettings.fontSize + 4,
-                                        fontFamily: fontSettings.fontFamily,
-                                        height: 1.4,
-                                      ),
+                                      style: TextStyle(height: 1.4),
                                     ),
                                   ],
                                 ),

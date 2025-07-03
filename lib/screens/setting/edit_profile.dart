@@ -1,6 +1,7 @@
 import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/screens/main/main_dashboard.dart';
 import 'package:azkar/utils/show_message.dart';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:azkar/widgets/save_button_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -54,7 +55,7 @@ class _EditProfileState extends State<EditProfile> {
           elevation: 0,
           iconTheme: IconThemeData(color: Colors.white),
           centerTitle: true,
-          title: Text(
+          title: ArabicText(
             languageProvider.localizedStrings["Edit Profile"] ?? "Edit Profile",
             style: TextStyle(color: Colors.white),
           ),

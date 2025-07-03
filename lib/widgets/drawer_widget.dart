@@ -4,6 +4,7 @@ import 'package:azkar/screens/drawer_pages/tasbeeh_counter.dart';
 import 'package:azkar/screens/main/main_dashboard.dart';
 import 'package:azkar/screens/setting/change_language.dart';
 import 'package:azkar/screens/setting/edit_profile.dart';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:azkar/widgets/logout_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -47,7 +48,7 @@ class _DrawerWidgetState extends State<DrawerWidget>
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: ListTile(
-              title: Text(
+              title: ArabicText(
                 languageProvider.localizedStrings["Allah Names"] ??
                     'Allah Names',
                 style: TextStyle(
@@ -66,7 +67,7 @@ class _DrawerWidgetState extends State<DrawerWidget>
           ),
           Divider(),
           ListTile(
-            title: Text(
+            title: ArabicText(
               languageProvider.localizedStrings["Tasbeeh Counter"] ??
                   'Tasbeeh Counter',
               style: TextStyle(
@@ -84,7 +85,7 @@ class _DrawerWidgetState extends State<DrawerWidget>
           ),
           Divider(),
           ListTile(
-            title: Text(
+            title: ArabicText(
               languageProvider.localizedStrings["Quran"] ?? 'Quran',
               style: TextStyle(
                 color: Colors.white,
@@ -104,7 +105,7 @@ class _DrawerWidgetState extends State<DrawerWidget>
           ),
           Divider(),
           ListTile(
-            title: Text(
+            title: ArabicText(
               languageProvider.localizedStrings["Language Setting"] ??
                   'Language Setting',
               style: TextStyle(
@@ -122,7 +123,7 @@ class _DrawerWidgetState extends State<DrawerWidget>
           ),
           Divider(),
           ListTile(
-            title: Text(
+            title: ArabicText(
               languageProvider.localizedStrings["My Profile"] ?? 'My Profile',
               style: TextStyle(
                 color: Colors.white,
@@ -147,7 +148,7 @@ class _DrawerWidgetState extends State<DrawerWidget>
                 },
               );
             },
-            title: Text(
+            title: ArabicText(
               languageProvider.localizedStrings["Logout"] ?? "Logout",
               style: TextStyle(color: Colors.white),
             ),

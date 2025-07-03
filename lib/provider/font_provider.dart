@@ -1,19 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class FontSettings with ChangeNotifier {
-  double _fontSize = 26;
-  String _fontFamily = 'Amiri';
+class FontSettingsProvider extends ChangeNotifier {
+  String _arabicFontFamily = 'Amiri'; // default
+  double _fontSize = 24.0; // default
 
+  String get arabicFontFamily => _arabicFontFamily;
   double get fontSize => _fontSize;
-  String get fontFamily => _fontFamily;
 
-  void setFontSize(double size) {
-    _fontSize = size;
+  FontSettingsProvider() {
+    _loadFontSettings();
+  }
+
+  Future<void> _loadFontSettings() async {
+    final prefs = await SharedPreferences.getInstance();
+    _arabicFontFamily = prefs.getString('arabicFontFamily') ?? 'Amiri';
+    _fontSize = prefs.getDouble('fontSize') ?? 24.0;
     notifyListeners();
   }
 
-  void setFontFamily(String family) {
-    _fontFamily = family;
+  Future<void> updateFontFamily(String font) async {
+    _arabicFontFamily = font;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('arabicFontFamily', font);
+    notifyListeners();
+  }
+
+  Future<void> updateFontSize(double size) async {
+    _fontSize = size;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble('fontSize', size);
+    notifyListeners();
+  }
+
+  /// 🔁 Reset to default and save in SharedPreferences
+  Future<void> resetToDefault() async {
+    _arabicFontFamily = 'Amiri';
+    _fontSize = 24.0;
+
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('arabicFontFamily', _arabicFontFamily);
+    await prefs.setDouble('fontSize', _fontSize);
+
     notifyListeners();
   }
 }

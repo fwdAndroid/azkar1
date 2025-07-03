@@ -1,6 +1,5 @@
-import 'package:azkar/provider/font_provider.dart';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:quran/quran.dart' as quran;
 
 class ReadQuran extends StatelessWidget {
@@ -8,8 +7,6 @@ class ReadQuran extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fontSettings = Provider.of<FontSettings>(context);
-
     return Scaffold(
       body: Directionality(
         textDirection: TextDirection.rtl,
@@ -28,13 +25,9 @@ class ReadQuran extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
                   child: Center(
-                    child: Text(
+                    child: ArabicText(
                       '${quran.getSurahName(surahNum)} (${quran.getSurahNameEnglish(surahNum)})',
-                      style: TextStyle(
-                        fontSize: fontSettings.fontSize + 4,
-                        fontFamily: fontSettings.fontFamily,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -56,14 +49,7 @@ class ReadQuran extends StatelessWidget {
                         vertical: 6,
                         horizontal: 12,
                       ),
-                      child: Text(
-                        ayah,
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                          fontSize: fontSettings.fontSize,
-                          fontFamily: fontSettings.fontFamily,
-                        ),
-                      ),
+                      child: ArabicText(ayah, textAlign: TextAlign.right),
                     );
                   },
                 ),

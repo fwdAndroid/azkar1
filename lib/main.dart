@@ -33,7 +33,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => LanguageProvider()),
         ChangeNotifierProvider(create: (context) => PrayerTimeProvider()),
-        ChangeNotifierProvider(create: (_) => FontSettings()),
+        ChangeNotifierProvider(create: (_) => FontSettingsProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
       ],
       child: const MyApp(),

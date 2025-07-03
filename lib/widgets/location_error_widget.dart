@@ -1,4 +1,5 @@
 import 'package:azkar/provider/language_provider.dart';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,13 +23,13 @@ class LocationErrorWidget extends StatelessWidget {
           children: <Widget>[
             Icon(Icons.location_off, size: 150, color: errorColor),
             box,
-            Text(
+            ArabicText(
               error!,
               style: TextStyle(color: errorColor, fontWeight: FontWeight.bold),
             ),
             box,
             ElevatedButton(
-              child: Text(
+              child: ArabicText(
                 languageProvider.localizedStrings["Retry"] ?? "Retry",
               ),
               onPressed: () {

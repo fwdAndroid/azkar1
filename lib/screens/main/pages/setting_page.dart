@@ -2,6 +2,7 @@ import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/screens/setting/change_language.dart';
 import 'package:azkar/screens/setting/edit_profile.dart';
 import 'package:azkar/screens/setting/notification_setting.dart';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:azkar/widgets/logout_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +46,7 @@ class _SettingPageState extends State<SettingPage> {
                     );
                   },
                   trailing: Icon(Icons.arrow_forward_ios, color: Colors.white),
-                  title: Text(
+                  title: ArabicText(
                     languageProvider.localizedStrings["Notifications"] ??
                         "Notifications",
                     style: TextStyle(color: Colors.white),
@@ -63,7 +64,7 @@ class _SettingPageState extends State<SettingPage> {
                     );
                   },
                   trailing: Icon(Icons.arrow_forward_ios, color: Colors.white),
-                  title: Text(
+                  title: ArabicText(
                     languageProvider.localizedStrings["Edit Profile"] ??
                         "Edit Profile",
                     style: TextStyle(color: Colors.white),
@@ -81,7 +82,7 @@ class _SettingPageState extends State<SettingPage> {
                     );
                   },
                   trailing: Icon(Icons.arrow_forward_ios, color: Colors.white),
-                  title: Text(
+                  title: ArabicText(
                     languageProvider.localizedStrings["Change Language"] ??
                         "Change Language",
                     style: TextStyle(color: Colors.white),
@@ -96,7 +97,7 @@ class _SettingPageState extends State<SettingPage> {
                     shareApp();
                   },
                   trailing: Icon(Icons.arrow_forward_ios, color: Colors.white),
-                  title: Text(
+                  title: ArabicText(
                     languageProvider.localizedStrings["Invite Friends"] ??
                         "Invite Friends",
                     style: TextStyle(color: Colors.white),
@@ -131,7 +132,7 @@ class _SettingPageState extends State<SettingPage> {
                         },
                       );
                     },
-                    child: Text(
+                    child: ArabicText(
                       languageProvider.localizedStrings["Logout"] ?? "Logout",
                       style: TextStyle(color: Colors.white),
                     ),

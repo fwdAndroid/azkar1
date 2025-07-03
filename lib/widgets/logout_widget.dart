@@ -1,6 +1,7 @@
 import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/screens/auth/login_screen.dart';
 import 'package:azkar/utils/show_message.dart';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -30,7 +31,7 @@ class LogoutWidget extends StatelessWidget {
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(
+                    child: ArabicText(
                       languageProvider
                               .localizedStrings["Oh No, you're leaving"] ??
                           "Oh No, you're leaving",
@@ -45,7 +46,7 @@ class LogoutWidget extends StatelessWidget {
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(
+                    child: ArabicText(
                       languageProvider
                               .localizedStrings['Are you sure you want to log out?'] ??
                           "Are you sure you want to log out?",

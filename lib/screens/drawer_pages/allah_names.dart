@@ -1,5 +1,6 @@
 import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/utils/allah_names_utils.dart';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -44,7 +45,7 @@ class _AllahNamesState extends State<AllahNames> {
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.white),
         centerTitle: true,
-        title: Text(
+        title: ArabicText(
           languageProvider.localizedStrings["Allah Names"] ?? "Allah Names",
           style: TextStyle(color: Colors.white),
         ),
@@ -70,11 +71,11 @@ class _AllahNamesState extends State<AllahNames> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              ArabicText(
                 "${currentIndex + 1}",
                 style: TextStyle(color: Colors.white, fontSize: fontSizeTitle),
               ),
-              Text(
+              ArabicText(
                 name['transliteration']!,
                 style: TextStyle(color: Colors.white, fontSize: fontSizeTitle),
               ),
@@ -87,7 +88,7 @@ class _AllahNamesState extends State<AllahNames> {
                     width: imageSize,
                     height: imageSize,
                   ),
-                  Text(
+                  ArabicText(
                     name['arabic']!,
                     style: TextStyle(
                       color: Colors.white,
@@ -98,7 +99,7 @@ class _AllahNamesState extends State<AllahNames> {
                 ],
               ),
               const SizedBox(height: 20),
-              Text(
+              ArabicText(
                 name['meaning']!,
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -121,7 +122,7 @@ class _AllahNamesState extends State<AllahNames> {
                     vertical: 12,
                   ),
                 ),
-                child: Text(
+                child: ArabicText(
                   languageProvider.localizedStrings["Next"] ?? "Next",
                 ),
               ),

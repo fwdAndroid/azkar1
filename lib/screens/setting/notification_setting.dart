@@ -1,4 +1,5 @@
 import 'package:azkar/provider/language_provider.dart';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +52,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(
+        content: ArabicText(
           enabled ? '$prayer $enabledText' : '$prayer $disabledText',
         ),
         duration: const Duration(seconds: 2),
@@ -70,7 +71,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
-        title: Text(
+        title: ArabicText(
           lang.localizedStrings["Azan Notification Settings"] ??
               "Azan Notification Settings",
           style: const TextStyle(color: Colors.white),
@@ -93,7 +94,7 @@ class _NotificationSettingState extends State<NotificationSetting> {
             final enabled = _prayerToggles[prayer] ?? true;
 
             return SwitchListTile(
-              title: Text(
+              title: ArabicText(
                 "$switchTitlePrefix $prayer",
                 style: TextStyle(color: Colors.white),
               ),

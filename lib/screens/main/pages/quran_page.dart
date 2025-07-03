@@ -2,8 +2,8 @@ import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/provider/theme_provider.dart';
 import 'package:azkar/screens/main/quran_screens/audio_quran.dart';
 import 'package:azkar/screens/main/quran_screens/read_quran.dart';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:azkar/widgets/drawer_widget.dart';
-import 'package:azkar/widgets/font_setting_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,14 +18,6 @@ class _QuranPageState extends State<QuranPage> {
   // This should be your full list of ayahs, fetched or stored globally
   // For example purposes, I initialize an empty list here
   List<dynamic> allAyahs = [];
-
-  @override
-  void initState() {
-    super.initState();
-    // TODO: Load your full list of ayahs here and assign to allAyahs
-    // For example:
-    // allAyahs = yourQuranData.surah.flatMap((s) => s.ayahs);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +41,7 @@ class _QuranPageState extends State<QuranPage> {
             backgroundColor: Colors.transparent,
             appBar: AppBar(
               iconTheme: const IconThemeData(color: Colors.white),
-              title: Text(
+              title: ArabicText(
                 languageProvider.localizedStrings["Quran"] ?? 'Quran',
                 style: const TextStyle(color: Colors.white),
               ),
@@ -66,20 +58,6 @@ class _QuranPageState extends State<QuranPage> {
                     ),
                     onPressed: () => themeProvider.toggleTheme(),
                   ),
-                ),
-                PopupMenuButton<int>(
-                  icon: const Icon(Icons.more_vert),
-                  itemBuilder: (context) => [
-                    PopupMenuItem<int>(value: 0, child: Text('Font Settings')),
-                  ],
-                  onSelected: (value) {
-                    if (value == 0) {
-                      showDialog(
-                        context: context,
-                        builder: (_) => const FontSettingsDialog(),
-                      );
-                    }
-                  },
                 ),
               ],
               bottom: TabBar(

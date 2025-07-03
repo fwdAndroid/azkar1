@@ -4,6 +4,7 @@ import 'package:azkar/model/surrah_model.dart' as surah;
 import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/screens/main/quran_screens/audio_screen.dart';
 import 'package:azkar/utils/constatnns.dart';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -37,7 +38,7 @@ class _AudioSurahScreenState extends State<AudioSurahScreen> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           iconTheme: IconThemeData(color: Colors.white),
-          title: Text(
+          title: ArabicText(
             languageProvider.localizedStrings["Surah List"] ?? 'Surah List',
             style: TextStyle(
               color: Colors.white,
@@ -121,7 +122,7 @@ Widget AudioTile({
                 shape: BoxShape.circle,
                 color: Colors.white,
               ),
-              child: Text(
+              child: ArabicText(
                 (number).toString(),
                 style: TextStyle(
                   color: Colors.black,
@@ -134,7 +135,7 @@ Widget AudioTile({
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                ArabicText(
                   surahName!,
                   textAlign: TextAlign.end,
                   style: TextStyle(
@@ -144,7 +145,7 @@ Widget AudioTile({
                   ),
                 ),
                 SizedBox(height: 3),
-                Text(
+                ArabicText(
                   "Total Aya : $totalAya",
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 ),

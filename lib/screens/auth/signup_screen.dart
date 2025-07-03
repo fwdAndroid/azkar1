@@ -2,6 +2,7 @@ import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/screens/auth/login_screen.dart';
 import 'package:azkar/screens/main/main_dashboard.dart';
 import 'package:azkar/service/auth_service.dart';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -90,7 +91,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   const SizedBox(height: 40),
                   Image.asset("assets/logo.png", height: 150),
                   const SizedBox(height: 20),
-                  Text(
+                  ArabicText(
                     languageProvider.localizedStrings["SignUp to Azkar App"] ??
                         'SignUp to Azkar App',
                     style: TextStyle(
@@ -100,7 +101,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Text(
+                  ArabicText(
                     languageProvider
                             .localizedStrings["Begin each day with guidance from Allah.\n Let prayer shape your path and purpose."] ??
                         'Begin each day with guidance from Allah.\n Let prayer shape your path and purpose.',
@@ -114,7 +115,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     alignment: Alignment.centerLeft,
                     child: Padding(
                       padding: EdgeInsets.only(left: 8, top: 8),
-                      child: Text(
+                      child: ArabicText(
                         languageProvider.localizedStrings["User Name"] ??
                             "User Name",
                         style: TextStyle(color: Colors.white),
@@ -148,7 +149,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     alignment: Alignment.centerLeft,
                     child: Padding(
                       padding: EdgeInsets.only(left: 8, top: 8),
-                      child: Text(
+                      child: ArabicText(
                         languageProvider.localizedStrings["Email address"] ??
                             "Email address",
                         style: TextStyle(color: Colors.white),
@@ -180,7 +181,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     alignment: Alignment.centerLeft,
                     child: Padding(
                       padding: EdgeInsets.only(left: 8, top: 8),
-                      child: Text(
+                      child: ArabicText(
                         languageProvider.localizedStrings["Password"] ??
                             "Password",
                         style: TextStyle(color: Colors.white),
@@ -226,7 +227,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                           ),
                           onPressed: isLoading ? null : _handleAuth,
-                          child: Text(
+                          child: ArabicText(
                             languageProvider.localizedStrings["Sign Up"] ??
                                 "Sign Up",
                             style: TextStyle(color: Colors.white),
@@ -236,7 +237,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Text(
+                  ArabicText(
                     languageProvider
                             .localizedStrings["Other sign in options"] ??
                         "Other sign in options",
@@ -261,7 +262,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(
+                      child: ArabicText(
                         languageProvider
                                 .localizedStrings["Already have an account? Sign In"] ??
                             "Already have an account? Sign In",

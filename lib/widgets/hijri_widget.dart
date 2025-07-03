@@ -1,4 +1,5 @@
 // lib/widgets/hijri_calendar.dart
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:intl/intl.dart';
@@ -28,7 +29,7 @@ class HijriWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text(
+          ArabicText(
             hijriFormatted,
             style: const TextStyle(
               fontSize: 18,
@@ -37,12 +38,12 @@ class HijriWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          Text(
+          ArabicText(
             gregorianFormatted,
             style: const TextStyle(fontSize: 16, color: Colors.grey),
           ),
           const SizedBox(height: 8),
-          Text(
+          ArabicText(
             hijriDate.longMonthName,
             style: const TextStyle(fontSize: 16, color: Colors.grey),
           ),

@@ -1,6 +1,7 @@
 // lib/screens/location_selector.dart
 import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/service/prayer_location.dart';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart' as geo;
 import 'package:provider/provider.dart';
@@ -62,7 +63,7 @@ class _LocationSelectorState extends State<LocationSelector> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: ArabicText(
           languageProvider.localizedStrings["Select Location"] ??
               'Select Location',
         ),
@@ -105,7 +106,7 @@ class _LocationSelectorState extends State<LocationSelector> {
                   final location = _searchResults[index];
                   return ListTile(
                     leading: const Icon(Icons.location_on),
-                    title: Text(location.name),
+                    title: ArabicText(location.name),
                     onTap: () => Navigator.pop(context, location),
                   );
                 },
@@ -114,7 +115,7 @@ class _LocationSelectorState extends State<LocationSelector> {
           else
             Expanded(
               child: Center(
-                child: Text(
+                child: ArabicText(
                   _searchController.text.isEmpty
                       ? languageProvider
                                 .localizedStrings["Search for a location"] ??

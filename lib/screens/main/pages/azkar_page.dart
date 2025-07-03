@@ -7,6 +7,7 @@ import 'package:azkar/screens/surah/surah_kahaf.dart';
 import 'package:azkar/screens/surah/surah_yasin.dart';
 import 'package:azkar/screens/view/view_azkars.dart';
 import 'package:azkar/screens/view/view_dua.dart';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:azkar/widgets/azkar_title_widget.dart';
 import 'package:azkar/widgets/drawer_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -59,7 +60,7 @@ class _AzkarPageState extends State<AzkarPage> {
                   // Hijri Date
                   Padding(
                     padding: const EdgeInsets.only(left: 16.0, bottom: 4),
-                    child: Text(
+                    child: ArabicText(
                       "${_hijriDate.toFormat("dd MMMM, yyyy")} AH",
                       style: const TextStyle(
                         fontSize: 20,
@@ -138,7 +139,7 @@ class _AzkarPageState extends State<AzkarPage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Text(
+                                          ArabicText(
                                             languageProvider
                                                     .localizedStrings["Today's Dua"] ??
                                                 "Today's Dua",
@@ -152,7 +153,7 @@ class _AzkarPageState extends State<AzkarPage> {
                                           Expanded(
                                             child: Container(
                                               alignment: Alignment.center,
-                                              child: Text(
+                                              child: ArabicText(
                                                 post['dua'] ?? '',
                                                 style: const TextStyle(
                                                   fontSize: 20,

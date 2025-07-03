@@ -1,7 +1,7 @@
 import 'package:azkar/provider/font_provider.dart';
 import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/provider/theme_provider.dart';
-import 'package:azkar/widgets/font_setting_dialog.dart';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -28,7 +28,6 @@ class _AyatAlKursiScreenState extends State<AyatAlKursiScreen> {
   @override
   Widget build(BuildContext context) {
     final languageProvider = Provider.of<LanguageProvider>(context);
-    final fontSettings = Provider.of<FontSettings>(context);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -43,26 +42,13 @@ class _AyatAlKursiScreenState extends State<AyatAlKursiScreen> {
               onPressed: () => themeProvider.toggleTheme(),
             ),
           ),
-          PopupMenuButton<int>(
-            icon: const Icon(Icons.more_vert),
-            itemBuilder: (context) => [
-              PopupMenuItem<int>(value: 0, child: Text('Font Settings')),
-            ],
-            onSelected: (value) {
-              if (value == 0) {
-                showDialog(
-                  context: context,
-                  builder: (_) => const FontSettingsDialog(),
-                );
-              }
-            },
-          ),
+
           IconButton(
             icon: const Icon(Icons.share, color: Colors.white),
             onPressed: shareSurahText,
           ),
         ],
-        title: Text(
+        title: ArabicText(
           languageProvider.localizedStrings["Ayat al-Kursi"] ?? 'Ayat al-Kursi',
           style: TextStyle(color: Colors.white),
         ),
@@ -84,12 +70,10 @@ class _AyatAlKursiScreenState extends State<AyatAlKursiScreen> {
               Expanded(
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.all(24),
-                  child: Text(
+                  child: ArabicText(
                     ayahText,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: fontSettings.fontSize + 4,
-                      fontFamily: fontSettings.fontFamily,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),

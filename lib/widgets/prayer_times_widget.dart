@@ -2,6 +2,7 @@ import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/provider/prayer_time_provider.dart';
 import 'package:azkar/service/prayer_location.dart';
 import 'package:azkar/service/prayer_model.dart';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:azkar/widgets/location_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -112,7 +113,7 @@ class _PrayerTimesWidgetState extends State<PrayerTimesWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  ArabicText(
                     languageProvider.localizedStrings['Prayer Times'] ??
                         'Prayer Times',
                     style: const TextStyle(
@@ -122,7 +123,7 @@ class _PrayerTimesWidgetState extends State<PrayerTimesWidget> {
                     ),
                   ),
                   TextButton(
-                    child: Text(
+                    child: ArabicText(
                       languageProvider.localizedStrings['Change Location'] ??
                           "Change Location",
                     ),
@@ -152,7 +153,7 @@ class _PrayerTimesWidgetState extends State<PrayerTimesWidget> {
                     ),
                     const SizedBox(width: 8),
                     Expanded(
-                      child: Text(
+                      child: ArabicText(
                         provider.currentLocation!.name,
                         style: const TextStyle(
                           fontSize: 14,
@@ -162,7 +163,7 @@ class _PrayerTimesWidgetState extends State<PrayerTimesWidget> {
                     ),
                     TextButton(
                       onPressed: provider.resetToCurrentLocation,
-                      child: Text(
+                      child: ArabicText(
                         languageProvider.localizedStrings['Reset to Current'] ??
                             'Reset',
                       ),
@@ -179,7 +180,7 @@ class _PrayerTimesWidgetState extends State<PrayerTimesWidget> {
                       duration: const Duration(milliseconds: 500),
                       transitionBuilder: (child, animation) =>
                           FadeTransition(opacity: animation, child: child),
-                      child: Text(
+                      child: ArabicText(
                         ' Next Prayer ($_nextPrayerName): $_nextPrayerCountdown',
                         key: ValueKey(_nextPrayerCountdown),
                         style: const TextStyle(
@@ -232,7 +233,7 @@ class _PrayerTimesWidgetState extends State<PrayerTimesWidget> {
                   }),
                 )
               else if (provider.error != null)
-                Text(
+                ArabicText(
                   'Error: ${provider.error}',
                   style: const TextStyle(color: Colors.red),
                 )
@@ -320,7 +321,7 @@ class _PrayerTimesWidgetState extends State<PrayerTimesWidget> {
                           shape: BoxShape.circle,
                         ),
                       ),
-                    Text(
+                    ArabicText(
                       prayer.name,
                       style: TextStyle(
                         fontSize: 16,
@@ -332,7 +333,7 @@ class _PrayerTimesWidgetState extends State<PrayerTimesWidget> {
                     ),
                   ],
                 ),
-                Text(
+                ArabicText(
                   prayer.time,
                   style: TextStyle(
                     fontSize: 16,

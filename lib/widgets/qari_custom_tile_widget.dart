@@ -1,4 +1,5 @@
 import 'package:azkar/model/qari_model.dart';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:flutter/material.dart';
 
 class QariCustomTile extends StatefulWidget {
@@ -28,7 +29,7 @@ class _QariCustomTileState extends State<QariCustomTile> {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(
+            child: ArabicText(
               widget.qari.name!,
               // 'Res',
               style: const TextStyle(color: Colors.white, fontSize: 14),

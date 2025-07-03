@@ -2,6 +2,7 @@ import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/screens/auth/signup_screen.dart';
 import 'package:azkar/screens/main/main_dashboard.dart';
 import 'package:azkar/service/auth_service.dart';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -40,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
     } catch (e) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(e.toString())));
+      ).showSnackBar(SnackBar(content: ArabicText(e.toString())));
     } finally {
       setState(() => isLoading = false);
     }
@@ -57,9 +58,9 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       }
     } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Google sign-in failed: $e')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: ArabicText('Google sign-in failed: $e')),
+      );
     } finally {
       setState(() => isLoading = false);
     }
@@ -88,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 40),
                   Image.asset("assets/logo.png", height: 150),
                   const SizedBox(height: 20),
-                  Text(
+                  ArabicText(
                     languageProvider.localizedStrings["Login to Azkar App"] ??
                         'Login to Azkar App',
                     style: TextStyle(
@@ -98,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Text(
+                  ArabicText(
                     languageProvider
                             .localizedStrings["Begin each day with guidance from Allah.\n Let prayer shape your path and purpose."] ??
                         'Begin each day with guidance from Allah.\n Let prayer shape your path and purpose.',
@@ -112,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     alignment: Alignment.centerLeft,
                     child: Padding(
                       padding: EdgeInsets.only(left: 8, top: 8),
-                      child: Text(
+                      child: ArabicText(
                         languageProvider.localizedStrings["Email address"] ??
                             "Email address",
                         style: TextStyle(color: Colors.white),
@@ -144,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     alignment: Alignment.centerLeft,
                     child: Padding(
                       padding: EdgeInsets.only(left: 8, top: 8),
-                      child: Text(
+                      child: ArabicText(
                         languageProvider.localizedStrings["Password"] ??
                             "Password",
                         style: TextStyle(color: Colors.white),
@@ -190,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           onPressed: isLoading ? null : _handleAuth,
-                          child: Text(
+                          child: ArabicText(
                             languageProvider.localizedStrings["Sign in"] ??
                                 "Sign in",
                             style: TextStyle(color: Colors.white),
@@ -200,7 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Text(
+                  ArabicText(
                     languageProvider
                             .localizedStrings["Other sign in options"] ??
                         "Other sign in options",
@@ -225,7 +226,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(
+                      child: ArabicText(
                         languageProvider
                                 .localizedStrings["Don't have an account? Sign Up"] ??
                             "Don't have an account? Sign Up",
