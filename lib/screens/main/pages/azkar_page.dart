@@ -344,7 +344,10 @@ class _AzkarPageState extends State<AzkarPage> {
                     image: "assets/quran.png",
                     onTap: () => Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (builder) => OpenSurahPage()),
+                      MaterialPageRoute(
+                        builder: (builder) =>
+                            OpenSurahPage(pdfAssetPath: "assets/pdf/s.pdf"),
+                      ),
                     ),
                     text: "سورة الكهف",
                   ),

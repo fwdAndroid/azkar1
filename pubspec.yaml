@@ -58,6 +58,7 @@ dependencies:
   shared_preferences: ^2.5.3
   shimmer: ^3.0.0
   social_login_buttons: ^1.0.7
+  syncfusion_flutter_pdfviewer: ^30.1.38
   timezone: ^0.10.1
   uuid: ^4.5.1
 
@@ -81,8 +82,10 @@ flutter:
   assets:
     - assets/
     - assets/lang/
+    - assets/fonts/
     - assets/fonts/Amiri-Regular.ttf
     - assets/fonts/ScheherazadeNew-Regular.ttf
+    - assets/pdf/s.pdf
 
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -103,6 +106,6 @@ flutter:
         - asset: assets/fonts/ScheherazadeNew-Regular.ttf
     - family: KFGQPC
       fonts:
-        - asset: assets/fonts/KFGQPC Uthmanic Script HAFS Regular.ttf    
+        - asset: assets/fonts/KFGQPC Uthmanic Script HAFS Regular.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
