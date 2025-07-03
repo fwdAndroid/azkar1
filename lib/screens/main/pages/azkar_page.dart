@@ -215,73 +215,6 @@ class _AzkarPageState extends State<AzkarPage> {
                       );
                     },
                   ),
-                  //Ayat ul kursis
-                  AzkarTitleWidget(
-                    image: "assets/ayar.png",
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (builder) => AyatAlKursiScreen(),
-                      ),
-                    ),
-                    text: "آية الكرسي",
-                  ),
-
-                  //Surah Yasin
-                  AzkarTitleWidget(
-                    image: "assets/koran.png",
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (builder) => SurahYasinPage()),
-                    ),
-                    text: "سورة يس",
-                  ),
-
-                  //Surah AlKahaf
-                  AzkarTitleWidget(
-                    image: "assets/quran.png",
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (builder) => OpenSurahPage()),
-                    ),
-                    text: "سورة الكهف",
-                  ),
-
-                  //Dua
-                  AzkarTitleWidget(
-                    image: "assets/islam.png",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (builder) => RuqyahScreen()),
-                      );
-                    },
-                    text: "الرقية من القرآن الكريم",
-                  ),
-                  //Dua
-                  AzkarTitleWidget(
-                    image: "assets/dua.png",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (builder) => DuaPage()),
-                      );
-                    },
-                    text: "دعاء",
-                  ),
-                  //Al Raqaya From Sunnah
-                  AzkarTitleWidget(
-                    image: "assets/tasbih.png",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (builder) => RuqyahSunnahScreen(),
-                        ),
-                      );
-                    },
-                    text: "الرقية من السنة",
-                  ),
                   // Azkar Sections
                   AzkarTitleWidget(
                     image: "assets/star.png",
@@ -305,6 +238,7 @@ class _AzkarPageState extends State<AzkarPage> {
                     ),
                     text: "أذكار المساء",
                   ),
+
                   AzkarTitleWidget(
                     image: "assets/night.png",
                     onTap: () => Navigator.push(
@@ -348,6 +282,70 @@ class _AzkarPageState extends State<AzkarPage> {
                       ),
                     ),
                     text: "فوائد الأذكار",
+                  ),
+                  //Dua
+                  AzkarTitleWidget(
+                    image: "assets/dua.png",
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (builder) => DuaPage()),
+                      );
+                    },
+                    text: "دعاء",
+                  ),
+                  //Al Raqaya From Sunnah
+                  AzkarTitleWidget(
+                    image: "assets/tasbih.png",
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (builder) => RuqyahSunnahScreen(),
+                        ),
+                      );
+                    },
+                    text: "الرقية من السنة",
+                  ),
+                  //Dua
+                  AzkarTitleWidget(
+                    image: "assets/islam.png",
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (builder) => RuqyahScreen()),
+                      );
+                    },
+                    text: "الرقية من القرآن الكريم",
+                  ), //Ayat ul kursis
+                  AzkarTitleWidget(
+                    image: "assets/ayar.png",
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (builder) => AyatAlKursiScreen(),
+                      ),
+                    ),
+                    text: "آية الكرسي",
+                  ),
+                  //Surah Yasin
+                  AzkarTitleWidget(
+                    image: "assets/koran.png",
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (builder) => SurahYasinPage()),
+                    ),
+                    text: "سورة يس",
+                  ),
+
+                  //Surah AlKahaf
+                  AzkarTitleWidget(
+                    image: "assets/quran.png",
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (builder) => OpenSurahPage()),
+                    ),
+                    text: "سورة الكهف",
                   ),
                 ],
               ),
