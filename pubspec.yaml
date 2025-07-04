@@ -86,9 +86,9 @@ flutter:
     - assets/fonts/
     - assets/fonts/Amiri-Regular.ttf
     - assets/fonts/ScheherazadeNew-Regular.ttf
+    - assets/fonts/tahoma.ttf
     - assets/books/s.pdf
     - assets/books/y.pdf
-    - assets/books/quran.pdf
     - assets/books/ayat.pdf
 
   #   - images/a_dot_ham.jpeg
@@ -111,5 +111,8 @@ flutter:
     - family: KFGQPC
       fonts:
         - asset: assets/fonts/KFGQPC Uthmanic Script HAFS Regular.ttf
+    - family: Tahoma
+      fonts:
+        - asset: assets/fonts/tahoma.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

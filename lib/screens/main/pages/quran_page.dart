@@ -39,6 +39,7 @@ class _ReadQuranState extends State<ReadQuran> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         title: ArabicText(
           languageProvider.localizedStrings["Read Quran"] ?? 'Read Quran',
           style: TextStyle(color: Colors.white),
@@ -53,11 +54,13 @@ class _ReadQuranState extends State<ReadQuran> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Stack(
-          children: [
-            WebViewWidget(controller: _controller),
-            if (isLoading) const Center(child: CircularProgressIndicator()),
-          ],
+        child: SafeArea(
+          child: Stack(
+            children: [
+              WebViewWidget(controller: _controller),
+              if (isLoading) const Center(child: CircularProgressIndicator()),
+            ],
+          ),
         ),
       ),
     );
