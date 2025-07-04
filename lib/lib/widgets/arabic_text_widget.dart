@@ -13,7 +13,7 @@ class ArabicText extends StatelessWidget {
     this.text, {
     super.key,
     this.style,
-    this.textAlign = TextAlign.center,
+    this.textAlign = TextAlign.left,
     this.maxLines,
     this.overflow,
   });

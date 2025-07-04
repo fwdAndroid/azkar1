@@ -324,7 +324,9 @@ class _AzkarPageState extends State<AzkarPage> {
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (builder) => AyatAlKursiScreen(),
+                        builder: (builder) => AyatAlKursiScreen(
+                          pdfAssetPath: "assets/pdf/ayat.pdf",
+                        ),
                       ),
                     ),
                     text: "آية الكرسي",
@@ -334,7 +336,10 @@ class _AzkarPageState extends State<AzkarPage> {
                     image: "assets/koran.png",
                     onTap: () => Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (builder) => SurahYasinPage()),
+                      MaterialPageRoute(
+                        builder: (builder) =>
+                            SurahYasinPage(pdfAssetPath: "assets/pdf/y.pdf"),
+                      ),
                     ),
                     text: "سورة يس",
                   ),

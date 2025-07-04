@@ -22,7 +22,7 @@ class _MainDashboardState extends State<MainDashboard> {
 
   final List<Widget> _screens = [
     AzkarPage(), // Replace with your screen widgets
-    QuranPage(),
+    ReadQuran(),
     PrayerPage(),
     SettingPage(),
   ];

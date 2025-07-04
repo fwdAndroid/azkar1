@@ -40,10 +40,7 @@ class _PrayerPageState extends State<PrayerPage> {
           onRefresh: () async => provider.loadLocationAndPrayerTimes(),
           child: Column(
             children: [
-              const SizedBox(height: 30),
-
-              const HijriWidget(),
-              const SizedBox(height: 5),
+              SafeArea(child: const HijriWidget()),
               const PrayerTimesWidget(),
             ],
           ),

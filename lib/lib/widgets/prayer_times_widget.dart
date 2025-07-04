@@ -117,13 +117,14 @@ class _PrayerTimesWidgetState extends State<PrayerTimesWidget> {
                     languageProvider.localizedStrings['Prayer Times'] ??
                         'Prayer Times',
                     style: const TextStyle(
-                      fontSize: 20,
+                      fontSize: 19,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF1D3B2A),
                     ),
                   ),
                   TextButton(
                     child: ArabicText(
+                      style: TextStyle(color: Colors.green),
                       languageProvider.localizedStrings['Change Location'] ??
                           "Change Location",
                     ),
@@ -156,7 +157,7 @@ class _PrayerTimesWidgetState extends State<PrayerTimesWidget> {
                       child: ArabicText(
                         provider.currentLocation!.name,
                         style: const TextStyle(
-                          fontSize: 14,
+                          fontSize: 16,
                           color: Colors.grey,
                         ),
                       ),

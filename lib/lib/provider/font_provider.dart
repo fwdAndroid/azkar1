@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class FontSettingsProvider extends ChangeNotifier {
   String _arabicFontFamily = 'Amiri'; // default
-  double _fontSize = 18.0; // default
+  double _fontSize = 14.0; // default
 
   String get arabicFontFamily => _arabicFontFamily;
   double get fontSize => _fontSize;
