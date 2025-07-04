@@ -86,7 +86,10 @@ flutter:
     - assets/fonts/
     - assets/fonts/Amiri-Regular.ttf
     - assets/fonts/ScheherazadeNew-Regular.ttf
-    - assets/pdf/s.pdf
+    - assets/books/s.pdf
+    - assets/books/y.pdf
+    - assets/books/quran.pdf
+    - assets/books/ayat.pdf
 
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
