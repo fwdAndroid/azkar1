@@ -46,7 +46,7 @@ class Datum {
   String? englishName;
   Format? format;
   Type? type;
-  dynamic? direction;
+  dynamic direction;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
     identifier: json["identifier"],
