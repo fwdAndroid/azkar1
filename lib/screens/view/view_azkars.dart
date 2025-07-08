@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:azkar/widgets/arabic_text_widget.dart';
 
 class ViewAzkarPage extends StatefulWidget {
   final String azkarType;
@@ -22,7 +23,7 @@ class _ViewAzkarPageState extends State<ViewAzkarPage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         iconTheme: IconThemeData(color: Colors.white),
-        title: Text(
+        title: ArabicText(
           languageProvider.localizedStrings["Azkar"] ?? "Azkar",
           style: TextStyle(color: Colors.white),
         ),
@@ -79,7 +80,7 @@ class _ViewAzkarPageState extends State<ViewAzkarPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const Text(
+                        ArabicText(
                           "﷽",
                           style: TextStyle(
                             fontSize: 28,
@@ -90,7 +91,7 @@ class _ViewAzkarPageState extends State<ViewAzkarPage> {
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 8),
-                        Text(
+                        ArabicText(
                           arabic,
                           style: GoogleFonts.scheherazadeNew(
                             fontSize: 16,
@@ -102,7 +103,7 @@ class _ViewAzkarPageState extends State<ViewAzkarPage> {
                         ),
                         const SizedBox(height: 12),
                         if (translation.isNotEmpty)
-                          Text(
+                          ArabicText(
                             translation,
                             style: const TextStyle(
                               fontSize: 16,
