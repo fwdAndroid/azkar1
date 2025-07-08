@@ -117,7 +117,8 @@ class _ReadQuranState extends State<ReadQuran> {
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         subtitle: ArabicText(
-          '${quran.getVerseCount(surahNumber)} verses • ${quran.getSurahName(surahNumber)}',
+          '${quran.getVerseCount(surahNumber)} verses ',
+          style: TextStyle(color: Colors.black, fontSize: 12),
         ),
         trailing: const Icon(Icons.chevron_right),
         onTap: () {

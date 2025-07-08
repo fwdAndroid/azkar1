@@ -21,7 +21,9 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
     final versesCount = quran.getVerseCount(widget.surahNumber);
 
     return Scaffold(
-      appBar: AppBar(title: ArabicText(surahName)),
+      appBar: AppBar(
+        title: ArabicText(surahName, style: TextStyle(color: Colors.black)),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView.builder(
@@ -64,20 +66,8 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
                       ),
                     ),
                   ),
+                  Divider(),
                   const SizedBox(height: 8),
-                  // Translation (if enabled)
-                  if (showTranslation)
-                    ArabicText(
-                      quran.getVerseTranslation(
-                        widget.surahNumber,
-                        verseNumber,
-                      ),
-                      style: TextStyle(
-                        fontSize: fontSize.toDouble(),
-                        color: Colors.grey[700],
-                      ),
-                    ),
-                  const Divider(),
                 ],
               ),
             );
