@@ -259,17 +259,7 @@ class _AzkarPageState extends State<AzkarPage> {
                     ),
                     text: "بعد الصلوات",
                   ),
-                  AzkarTitleWidget(
-                    image: "assets/books.png",
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (builder) =>
-                            ViewAzkarPage(azkarType: 'metaphor'),
-                      ),
-                    ),
-                    text: "مواجهة تشبيه",
-                  ),
+         
                   AzkarTitleWidget(
                     image: "assets/benefit.png",
                     onTap: () => Navigator.push(
