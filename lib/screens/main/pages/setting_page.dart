@@ -1,10 +1,8 @@
 import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/screens/setting/change_language.dart';
-import 'package:azkar/screens/setting/edit_profile.dart';
 import 'package:azkar/screens/setting/font_setting.dart';
 import 'package:azkar/screens/setting/notification_setting.dart';
 import 'package:azkar/widgets/arabic_text_widget.dart';
-import 'package:azkar/widgets/logout_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -55,24 +53,7 @@ class _SettingPageState extends State<SettingPage> {
                   leading: Icon(Icons.notifications, color: Colors.white),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListTile(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (builder) => EditProfile()),
-                    );
-                  },
-                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.white),
-                  title: ArabicText(
-                    languageProvider.localizedStrings["Edit Profile"] ??
-                        "Edit Profile",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  leading: Icon(Icons.person, color: Colors.white),
-                ),
-              ),
+
               Padding(
                 padding: const EdgeInsets.only(left: 8.0, right: 8, bottom: 8),
                 child: ListTile(
@@ -127,40 +108,6 @@ class _SettingPageState extends State<SettingPage> {
                 ),
               ),
             ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: SizedBox(
-                width: double.infinity,
-                height: 50,
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF097132),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return LogoutWidget();
-                        },
-                      );
-                    },
-                    child: ArabicText(
-                      languageProvider.localizedStrings["Logout"] ?? "Logout",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-            ),
           ),
         ],
       ),

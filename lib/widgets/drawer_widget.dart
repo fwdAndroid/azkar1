@@ -1,12 +1,9 @@
 import 'package:azkar/provider/language_provider.dart';
 import 'package:azkar/screens/drawer_pages/allah_names.dart';
 import 'package:azkar/screens/drawer_pages/tasbeeh_counter.dart';
-import 'package:azkar/screens/main/main_dashboard.dart';
 import 'package:azkar/screens/main/quran_screens/audio_quran.dart';
 import 'package:azkar/screens/setting/change_language.dart';
-import 'package:azkar/screens/setting/edit_profile.dart';
 import 'package:azkar/widgets/arabic_text_widget.dart';
-import 'package:azkar/widgets/logout_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -122,41 +119,6 @@ class _DrawerWidgetState extends State<DrawerWidget>
                 MaterialPageRoute(builder: (builder) => ChangeLangage()),
               );
             },
-          ),
-          Divider(),
-          ListTile(
-            title: ArabicText(
-              languageProvider.localizedStrings["My Profile"] ?? 'My Profile',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w300,
-                fontSize: 16,
-              ),
-              textAlign: TextAlign.left,
-            ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => EditProfile()),
-              );
-            },
-          ),
-          Divider(),
-          ListTile(
-            onTap: () async {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return LogoutWidget();
-                },
-              );
-            },
-            title: ArabicText(
-              languageProvider.localizedStrings["Logout"] ?? "Logout",
-              style: TextStyle(color: Colors.white),
-              textAlign: TextAlign.left,
-            ),
-            leading: Icon(Icons.logout, color: Colors.red),
           ),
         ],
       ),
