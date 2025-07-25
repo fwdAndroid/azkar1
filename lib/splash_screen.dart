@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:azkar/service/auth_wrapper.dart';
+import 'package:azkar/screens/main/main_dashboard.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => AuthWrapper()),
+      MaterialPageRoute(builder: (context) => MainDashboard()),
     );
   }
 
