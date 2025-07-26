@@ -1,4 +1,4 @@
-package com.azkar.app
+package com.azkarequran.app
 
 import io.flutter.embedding.android.FlutterActivity
 

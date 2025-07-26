@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:309649663701:android:ceed72c7d8e2b58956a45c",
+        "mobilesdk_app_id": "1:309649663701:android:330e1b53d598058a56a45c",
         "android_client_info": {
-          "package_name": "com.azkar.app"
+          "package_name": "com.azkaradmin.app"
         }
       },
       "oauth_client": [
@@ -43,9 +43,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:309649663701:android:330e1b53d598058a56a45c",
+        "mobilesdk_app_id": "1:309649663701:android:5bd8bf721f5a33fc56a45c",
         "android_client_info": {
-          "package_name": "com.azkaradmin.app"
+          "package_name": "com.azkarequran.app"
         }
       },
       "oauth_client": [
